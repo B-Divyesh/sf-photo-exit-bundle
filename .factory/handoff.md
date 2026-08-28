@@ -2,7 +2,7 @@
 
 ## Release repair
 
-This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
+This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The repair commits are `e6a98597df34509b0fe65c96b41dbcb51f62d82d` and `e97ac852e16eb1a523ef9c14b28bc3204a7752cd`. The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
 
 ### Fixed findings
 
@@ -28,6 +28,7 @@ All commands were run from `/work/repo` on 2026-08-28 after `npm ci` (0 vulnerab
 - Local Lighthouse 12.8.2 mobile production preview — **100 performance, 100 accessibility**; FCP 1.28 s, LCP 1.74 s, TBT 0 ms, CLS 0. The JSON evidence is ignored under `.factory/evidence/lighthouse.json`.
 - `npx @axe-core/cli` could not be used directly because its bundled Selenium ChromeDriver is version 152 while the preinstalled Playwright Chromium is 145. Its equivalent `@axe-core/playwright` WCAG A/AA scan passed on home, privacy, and demo at desktop and 390 px; the mobile demo finding above was fixed and rechecked.
 - Deployment policy regression test confirms CSP, Permissions-Policy, immutable cache directives, manifest MIME, and 404 status override. `curl` against Vite preview confirms the manifest MIME; Vite does not apply static-host cache/security config, which is consumed from the emitted Static Web Apps config at deployment.
+- Deployed with `/opt/fleet/lib/deploy-static.sh photo-exit-bundle /work/repo/dist` to the existing Azure Static Web App. Live identity check at `https://photo-exit-bundle.sociobot.in` passed on the repaired `index-NB8E1BLE.js` bundle; `verify-url.sh` reported HTTP 200, 836 ms local browser load, zero console errors, title/lang/main/one h1/alt/button checks passed. Live headers confirm CSP, Permissions-Policy, immutable JS caching, `application/manifest+json`, and `/404` returns HTTP 404.
 
 ## Run / deploy
 
@@ -46,4 +47,4 @@ Deploy the generated `dist/` directory as the existing static PWA. The repositor
 - The factory must have the live Sociobot product registration for `photo-exit-bundle`; the client intentionally uses no embedded product ID.
 - Folder output requires Chromium’s File System Access API. Other browsers use ZIP output and need memory near the final archive size.
 - Google can change Takeout conventions. Unsupported fields remain preserved in selected JSON sidecars; only documented/recognized date and motion hints control archive layout.
-- The full production identity/header check is performed after static deployment has propagated, because Vite preview intentionally does not serve `staticwebapp.config.json` as response headers.
+- Vite preview intentionally does not serve `staticwebapp.config.json` response headers; the final live Static Web Apps checks above are the deployment evidence.
