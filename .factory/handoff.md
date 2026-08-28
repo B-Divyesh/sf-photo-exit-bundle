@@ -2,7 +2,7 @@
 
 ## Release repair
 
-This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The repair commits are `e6a98597df34509b0fe65c96b41dbcb51f62d82d` and `e97ac852e16eb1a523ef9c14b28bc3204a7752cd`. The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
+This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The repair commits are `e6a98597df34509b0fe65c96b41dbcb51f62d82d` and `e97ac8580d79c3f393dbf5d4bdc2cf7bdd41e6b6`; deployment evidence was recorded in `d686def`. The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
 
 ### Fixed findings
 
