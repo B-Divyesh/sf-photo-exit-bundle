@@ -10,6 +10,8 @@ describe('static deployment policy', () => {
     const routes = config.routes as Array<{ route: string; headers: Record<string, string> }>;
     expect(routes.find((route) => route.route === '/assets/*')?.headers['Cache-Control']).toContain('immutable');
     expect(routes.find((route) => route.route === '/manifest.webmanifest')?.headers['Content-Type']).toBe('application/manifest+json');
+    expect((config.mimeTypes as Record<string, string>)['.webmanifest']).toBe('application/manifest+json');
+    expect((config.navigationFallback as { exclude: string[] }).exclude).toContain('/404');
     expect((config.responseOverrides as Record<string, { statusCode: number }>)['404'].statusCode).toBe(404);
   });
 });
