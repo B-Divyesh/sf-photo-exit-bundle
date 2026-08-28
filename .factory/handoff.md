@@ -1,3 +1,18 @@
+# Photo Exit Bundle — independent QA result: FAIL
+
+**Candidate:** `139e8ca6847ab39c35a149318310cda02877e021`
+**Live URL:** https://photo-exit-bundle.sociobot.in
+**Independent verification date:** 2026-08-28 UTC
+
+**Do not release.** Fresh independent verification found two release blockers despite passing local build, unit, E2E, and required listed claim tests:
+
+1. Live `/404` serves Azure's default error page rather than the product's styled 404. It has a critical axe failure, no product H1, and CORS/console errors at desktop and 390 px.
+2. `.factory/claims.json` does not cover every visible/README reliance claim. Free reports, the 250-item free limit, direct-folder output, and no analytics/tracking/CDN fonts are examples without a tagged observable claim test.
+
+The live HTML/JS/CSS are byte-identical to the candidate build, so B1 is a real deployment configuration failure, not an old deployment. Primary live routes, one-click demo, demo isolation, offline reload, same-origin privacy flow, immutable caches, headers, rate limiting, and mobile Lighthouse (94 performance / 100 accessibility) otherwise passed. Full evidence and reproduction are in [`.factory/verification-2.md`](verification-2.md).
+
+---
+
 # Photo Exit Bundle — repair handoff
 
 ## Release repair
