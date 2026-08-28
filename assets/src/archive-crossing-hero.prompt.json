@@ -1,0 +1,9 @@
+{
+  "asset": "archive-crossing-hero",
+  "generated": "2026-08-28",
+  "generator": "/opt/fleet/lib/gen-image.sh using the Factory Azure OpenAI image deployment",
+  "size": "1536x1024",
+  "quality": "high",
+  "prompt": "Surreal editorial cut-paper illustration of a family photo archive crossing at night: an impossible narrow paper causeway spans a calm deep-indigo sea. On the left, a cloud-shaped filing cabinet releases a small orderly ribbon of unlabeled instant photographs and one tiny film strip; on the right, they arrive at a warmly lit cream archive house with neat date drawers. One single red-orange photograph waits visibly on a small review island. Sophisticated magazine composition, tactile deckled paper, subtle grain, screen-print edges, navy, warm cream, muted cobalt, persimmon and moss palette, gentle overhead moonlight, wide landscape framing, useful negative space, no people, no screens. No text, no letters, no numbers, no logos, no brands, no watermark, no UI.",
+  "review": "Accepted: no text artifacts, logos, people, broken seams, or misleading product UI. The bridge, review island, and destination archive clearly support the product story."
+}
