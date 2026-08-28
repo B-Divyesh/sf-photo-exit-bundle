@@ -1,0 +1,288 @@
+
+CLAIM demo-sandbox
+COMMAND npm run test:claims -- --grep @claim:demo-sandbox
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:demo-sandbox
+
+[1A[2K[2m[WebServer] [22m(node:565) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:614) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:614) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/app.spec.ts:44:1 › @claim:demo-sandbox opens a sample archive without creating real run history
+[1A[2K[2/2] [mobile] › tests/app.spec.ts:44:1 › @claim:demo-sandbox opens a sample archive without creating real run history
+[1A[2K  2 passed (13.9s)
+RESULT demo-sandbox exit=0
+
+CLAIM local-only
+COMMAND npm run test:claims -- --grep @claim:local-only
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:local-only
+
+[1A[2K[2m[WebServer] [22m(node:805) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:837) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:855) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:855) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/app.spec.ts:56:1 › @claim:local-only keeps sample processing on the product origin without a Google sign-in
+[1A[2K[2/2] [mobile] › tests/app.spec.ts:56:1 › @claim:local-only keeps sample processing on the product origin without a Google sign-in
+[1A[2K  2 passed (12.6s)
+RESULT local-only exit=0
+
+CLAIM metadata-motion
+COMMAND npm run test:claims -- --grep @claim:metadata-motion
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:metadata-motion
+
+[1A[2K[2m[WebServer] [22m(node:1076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:1107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:1125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/app.spec.ts:65:1 › @claim:metadata-motion pairs sample metadata, motion media, and album membership
+[1A[2K[2/2] [mobile] › tests/app.spec.ts:65:1 › @claim:metadata-motion pairs sample metadata, motion media, and album membership
+[1A[2K  2 passed (12.9s)
+RESULT metadata-motion exit=0
+
+CLAIM csv-export
+COMMAND npm run test:claims -- --grep @claim:csv-export
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:csv-export
+
+[1A[2K[2m[WebServer] [22m(node:1332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:1364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:1382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1383) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1383) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [mobile] › tests/app.spec.ts:74:1 › @claim:csv-export exports every sample item as CSV
+[1A[2K[2/2] [chromium] › tests/app.spec.ts:74:1 › @claim:csv-export exports every sample item as CSV
+[1A[2K  2 passed (12.9s)
+RESULT csv-export exit=0
+
+CLAIM original-bytes
+COMMAND npm run test:claims -- --grep @claim:original-bytes
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:original-bytes
+
+[1A[2K[2m[WebServer] [22m(node:1577) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:1628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:1646) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1647) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1646) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1647) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/app.spec.ts:86:1 › @claim:original-bytes copies sample media bytes into the archive ZIP
+[1A[2K[2/2] [mobile] › tests/app.spec.ts:86:1 › @claim:original-bytes copies sample media bytes into the archive ZIP
+[1A[2K  2 passed (13.6s)
+RESULT original-bytes exit=0
+
+CLAIM takeout-archive
+COMMAND npm run test:claims -- --grep @claim:takeout-archive
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:takeout-archive
+
+[1A[2K[2m[WebServer] [22m(node:1844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:1876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:1895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:1894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [mobile] › tests/app.spec.ts:100:1 › @claim:takeout-archive writes dated folders and album lists for the sample
+[1A[2K[2/2] [chromium] › tests/app.spec.ts:100:1 › @claim:takeout-archive writes dated folders and album lists for the sample
+[1A[2K  2 passed (13.5s)
+RESULT takeout-archive exit=0
+
+CLAIM exit-pass-price
+COMMAND npm run test:claims -- --grep @claim:exit-pass-price
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:exit-pass-price
+
+[1A[2K[2m[WebServer] [22m(node:2087) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:2119) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:2137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [chromium] › tests/app.spec.ts:114:1 › @claim:exit-pass-price shows the one-time Exit Pass price and included features
+[1A[2K[2/2] [mobile] › tests/app.spec.ts:114:1 › @claim:exit-pass-price shows the one-time Exit Pass price and included features
+[1A[2K  2 passed (12.8s)
+RESULT exit-pass-price exit=0
+
+CLAIM offline-reload
+COMMAND npm run test:claims -- --grep @claim:offline-reload
+
+> photo-exit-bundle@1.0.0 test:claims
+> playwright test --grep @claim:offline-reload
+
+[1A[2K[2m[WebServer] [22m(node:2359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1A[2K[2m[WebServer] [22m(node:2391) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 2 tests using 2 workers
+
+[1A[2K(node:2409) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:2409) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/2] [mobile] › tests/app.spec.ts:138:1 › @claim:offline-reload reloads the shell offline after the first visit
+[1A[2K[2/2] [chromium] › tests/app.spec.ts:138:1 › @claim:offline-reload reloads the shell offline after the first visit
+[1A[2K  2 passed (13.0s)
+RESULT offline-reload exit=0

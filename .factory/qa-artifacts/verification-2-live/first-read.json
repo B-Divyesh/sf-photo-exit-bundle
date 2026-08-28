@@ -1,0 +1,53 @@
+{
+  "url": "https://photo-exit-bundle.sociobot.in/",
+  "title": "Photo Exit Bundle — build a local Takeout archive",
+  "lang": "en",
+  "h1": [
+    "Build a private archive from Google Takeout"
+  ],
+  "viewportText": [
+    "Photo Exit Bundle",
+    "Demo",
+    "How it works",
+    "Unlock",
+    "FILES STAY IN THIS BROWSER",
+    "NO GOOGLE SIGN-IN",
+    "Build a private archive from Google Takeout",
+    "For families leaving Google Photos, turn an export into dated folders and album lists on this device.",
+    "→",
+    "The sample shows paired media, album lists, and one review item."
+  ],
+  "visibleLinks": [
+    {
+      "text": "Photo Exit Bundle",
+      "href": "https://photo-exit-bundle.sociobot.in/"
+    },
+    {
+      "text": "Demo",
+      "href": "https://photo-exit-bundle.sociobot.in/demo"
+    },
+    {
+      "text": "How it works",
+      "href": "https://photo-exit-bundle.sociobot.in/#how-it-works"
+    },
+    {
+      "text": "Unlock",
+      "href": "https://photo-exit-bundle.sociobot.in/#unlock"
+    },
+    {
+      "text": "Try it with sample data\n→",
+      "href": "https://photo-exit-bundle.sociobot.in/demo"
+    },
+    {
+      "text": "Inspect your Takeout\n↓",
+      "href": "https://photo-exit-bundle.sociobot.in/#start"
+    }
+  ],
+  "visibleButtons": [
+    ""
+  ],
+  "status": 200,
+  "errors": [
+    "pageerror: Cannot read properties of undefined (reading 'waiting')"
+  ]
+}
