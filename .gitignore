@@ -1,6 +1,10 @@
 node_modules/
 dist/
 .env
+playwright-report/
+test-results/
 *.log
+*.tsbuildinfo
 graphify-out/
+.factory/evidence/
 .DS_Store
