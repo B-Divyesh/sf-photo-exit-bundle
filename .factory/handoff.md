@@ -1,4 +1,14 @@
-# Photo Exit Bundle — build handoff
+# Photo Exit Bundle — handoff
+
+## Independent verifier status — FAIL (2026-08-28 UTC)
+
+Candidate `876c7122d88607919528b0aface5823213ffbfd3` was independently verified against https://photo-exit-bundle.sociobot.in. The live JS/CSS exactly match this candidate and its normal Takeout conversion path works, but it **must not release**: `.factory/claims.json` is missing and there is no isolated one-click “Try it with sample data” demo. The cold-screen plain-words requirement also fails. See [`.factory/verification.md`](verification.md) for exact commands, tests, deployment parity hashes, rate-limit evidence, passing behavior, and all defects by severity.
+
+The verifier did not modify product source. Clean install, unit, build, and 6 Playwright tests passed; independent live axe found no serious/critical violations; offline reload passed; checkout and rate limit were confirmed. Remaining release issues include absent CSP, non-immutable asset caching/manifest MIME, incomplete route metadata/404/support files, undersized link targets, empty ZIP handling, and live LCP at 2.5–2.7 s.
+
+---
+
+# Original build handoff
 
 ## What shipped
 
