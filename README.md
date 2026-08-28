@@ -1,10 +1,12 @@
 # Photo Exit Bundle
 
-Photo Exit Bundle turns Google Photos Takeout ZIPs or extracted folders into a normal, dated local archive. It pairs Google JSON sidecars and motion-video companions, records album membership, flags duplicate and missing items, and produces a portable README plus CSV/JSON manifests. Photo and video bytes are copied unchanged; nothing is uploaded.
+Build a local archive from Google Photos Takeout. Photo Exit Bundle reads ZIPs or extracted folders in your browser, pairs Google JSON sidecars and motion companions, and produces dated folders plus CSV/JSON reports. Source media bytes are copied unchanged into the archive ZIP.
 
 The app is for families leaving or reducing their reliance on Google Photos who want an archive they can inspect, share across devices, and understand without installing another photo service.
 
 Live product: <https://photo-exit-bundle.sociobot.in>
+
+Try the one-click sample at <https://photo-exit-bundle.sociobot.in/demo>. The sample is isolated from real run history; see [`.factory/demo.md`](.factory/demo.md).
 
 ## What it does
 
@@ -36,11 +38,12 @@ Open the printed local URL. For folder output, use a Chromium-family desktop bro
 npm test
 npm run build
 npm run test:e2e
+npm run test:claims
 ```
 
 The exact production build command is `npm run build`. Static output lands in `dist/`, with `dist/index.html` at its root. Deploy `dist/` as a static site with SPA fallback to `index.html` for `/privacy` and `/terms`.
 
-End-to-end tests pin Playwright 1.58.2 and exercise a generated Takeout ZIP on desktop Chromium and a 390 px mobile viewport, including archive download, axe checks, console errors, and an offline reload.
+End-to-end tests pin Playwright 1.58.2 and exercise a generated Takeout ZIP and the isolated `/demo` sample on desktop Chromium and a 390 px mobile viewport. They cover archive/report downloads, byte preservation, axe, console errors, empty ZIP recovery, route metadata, touch targets, and offline reload. Customer-facing claims are listed in [`.factory/claims.json`](.factory/claims.json) and each has a tagged browser test.
 
 ## Archive layout
 

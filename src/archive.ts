@@ -129,6 +129,7 @@ export async function analyzeFiles(
   const files = input.filter((file) => !file.path.split('/').some((part) => part === '__MACOSX' || part.startsWith('._')));
   const metadataFiles = files.filter((file) => extension(file.path) === 'json');
   const mediaFiles = files.filter((file) => PHOTO_EXTENSIONS.has(extension(file.path)) || VIDEO_EXTENSIONS.has(extension(file.path)));
+  if (!mediaFiles.length) throw new Error('No photos or videos were found in this selection. Choose a Takeout ZIP or folder that contains media files.');
   const unclassified = files.filter((file) => !metadataFiles.includes(file) && !mediaFiles.includes(file));
   const errors: AnalysisResult['errors'] = [];
   const metadataByKey = new Map<string, { file: SourceFile; metadata: GoogleMetadata | null; used: boolean }>();

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "demo-sandbox",
+    "claim": "Try a sample archive in one click; sample data is not saved as your run history.",
+    "where": "landing hero, demo banner, README",
+    "test": "npm run test:claims -- --grep @claim:demo-sandbox",
+    "sandbox": "fresh browser context at /demo; assert seeded result, demo namespace, no real run-history database, and same-origin requests"
+  },
+  {
+    "id": "local-only",
+    "claim": "Files stay in this browser and Photo Exit Bundle does not ask you to sign in to Google.",
+    "where": "landing eyebrow, privacy page, README",
+    "test": "npm run test:claims -- --grep @claim:local-only",
+    "sandbox": "fresh browser context at /demo; assert the no-sign-in copy and that the full sample flow makes only same-origin requests"
+  },
+  {
+    "id": "metadata-motion",
+    "claim": "Pairs Google metadata, motion companions, and album membership in the sample archive.",
+    "where": "landing facts, sample results, README",
+    "test": "npm run test:claims -- --grep @claim:metadata-motion",
+    "sandbox": "fresh browser context at /demo; assert the sample photo, paired status, motion count, and album"
+  },
+  {
+    "id": "csv-export",
+    "claim": "Exports the sample archive report as CSV.",
+    "where": "sample report action, README",
+    "test": "npm run test:claims -- --grep @claim:csv-export",
+    "sandbox": "fresh browser context at /demo; download CSV and assert its header and both sample media rows"
+  },
+  {
+    "id": "original-bytes",
+    "claim": "Copies sample media bytes unchanged into the archive ZIP.",
+    "where": "archive build copy, README",
+    "test": "npm run test:claims -- --grep @claim:original-bytes",
+    "sandbox": "fresh browser context at /demo; download archive ZIP and compare the seeded media payload byte-for-byte"
+  },
+  {
+    "id": "takeout-archive",
+    "claim": "Builds dated folders and album lists from the sample Takeout archive.",
+    "where": "landing headline and facts, README",
+    "test": "npm run test:claims -- --grep @claim:takeout-archive",
+    "sandbox": "fresh browser context at /demo; download archive ZIP and assert a dated media path and album CSV"
+  },
+  {
+    "id": "exit-pass-price",
+    "claim": "A $19 one-time Exit Pass includes unlimited archive builds and exact duplicate matching.",
+    "where": "landing facts, Exit Pass section, README",
+    "test": "npm run test:claims -- --grep @claim:exit-pass-price",
+    "sandbox": "fresh browser context at /demo; assert the displayed price, one-time label, and included features"
+  },
+  {
+    "id": "offline-reload",
+    "claim": "Works offline after the first visit.",
+    "where": "README, privacy page",
+    "test": "npm run test:claims -- --grep @claim:offline-reload",
+    "sandbox": "fresh browser context; wait for service-worker shell cache, set offline, reload, and assert the landing h1 and offline bar"
+  }
+]

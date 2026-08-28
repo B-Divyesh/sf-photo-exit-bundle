@@ -1,0 +1,23 @@
+{
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; base-uri 'self'; connect-src 'self' https://api.sociobot.in; font-src 'self'; form-action 'self' https://api.sociobot.in; frame-ancestors 'none'; img-src 'self' blob: data:; manifest-src 'self'; media-src 'self' blob:; object-src 'none'; script-src 'self'; style-src 'self'; worker-src 'self' blob:",
+    "Permissions-Policy": "camera=(), geolocation=(), microphone=(), payment=(), usb=()",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY"
+  },
+  "routes": [
+    { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/art/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/icons/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/manifest.webmanifest", "headers": { "Content-Type": "application/manifest+json", "Cache-Control": "public, max-age=86400" } },
+    { "route": "/sw.js", "headers": { "Cache-Control": "no-cache" } }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/art/*", "/icons/*", "/manifest.webmanifest", "/sw.js", "/offline.html", "/robots.txt", "/sitemap.xml"]
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/404", "statusCode": 404 }
+  }
+}

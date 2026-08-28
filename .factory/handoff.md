@@ -1,46 +1,49 @@
-# Photo Exit Bundle — handoff
+# Photo Exit Bundle — repair handoff
 
-## Independent verifier status — FAIL (2026-08-28 UTC)
+## Release repair
 
-Candidate `876c7122d88607919528b0aface5823213ffbfd3` was independently verified against https://photo-exit-bundle.sociobot.in. The live JS/CSS exactly match this candidate and its normal Takeout conversion path works, but it **must not release**: `.factory/claims.json` is missing and there is no isolated one-click “Try it with sample data” demo. The cold-screen plain-words requirement also fails. See [`.factory/verification.md`](verification.md) for exact commands, tests, deployment parity hashes, rate-limit evidence, passing behavior, and all defects by severity.
+This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
 
-The verifier did not modify product source. Clean install, unit, build, and 6 Playwright tests passed; independent live axe found no serious/critical violations; offline reload passed; checkout and rate limit were confirmed. Remaining release issues include absent CSP, non-immutable asset caching/manifest MIME, incomplete route metadata/404/support files, undersized link targets, empty ZIP handling, and live LCP at 2.5–2.7 s.
+### Fixed findings
 
----
+- **B1 — claims:** Added [`.factory/claims.json`](claims.json) with eight observable customer-facing claims. Each has one tagged Playwright test and was run individually in a fresh desktop and 390 px browser context.
+- **B2 — isolated one-click demo:** `/demo` and `/?demo=1` now build a realistic in-memory family-weekend sample immediately. The persistent **Demo — sample data, nothing is saved** banner includes Reset demo and Start for real. Demo mode uses the `demo:photo-exit-bundle:active` session namespace; it does not open/read/write normal IndexedDB history, licenses, or selected files. Details are in [`.factory/demo.md`](demo.md).
+- **B3 — cold-page copy:** The landing h1 is now “Build a private archive from Google Takeout.” The first sentence names families leaving Google Photos, and the first primary action is **Try it with sample data**. The copy audit is in [`.factory/copy-audit.md`](copy-audit.md).
+- **H1 / M1 — response policy:** Added `public/staticwebapp.config.json`, emitted as `dist/staticwebapp.config.json`, with CSP, Permissions-Policy, security headers, immutable caching for hashed/static assets, `application/manifest+json`, no-cache service worker, navigation fallback, and an HTTP 404 override.
+- **M2 — routes:** Added `/demo`, designed `/404`, route-specific title/description/canonical metadata, route focus movement and live announcement, `robots.txt`, and `sitemap.xml`.
+- **M3 — touch targets:** Brand, navigation, ticket legal links, and footer legal links now provide 44 px targets. The browser regression checks every visible landing-page link at desktop and 390 px.
+- **M4 — empty Takeout:** Analysis now rejects a media-empty ZIP/folder with a clear recovery message rather than presenting a successful archive. Unit and browser regression coverage include `Takeout/Google Photos/.keep`.
+- **M5 — LCP:** Kept the responsive WebP hero, removed unnecessary bundled copy weight, and held the initial bundle below the 200 KB raw limit.
+- **Additional accessibility repair:** Mobile axe found the horizontally scrolling demo ledger was not keyboard-focusable. It now has a label and keyboard focus, and desktop/mobile axe scans cover home, legal, and demo routes.
 
-# Original build handoff
+## Verification evidence
 
-## What shipped
+All commands were run from `/work/repo` on 2026-08-28 after `npm ci` (0 vulnerabilities):
 
-- A Vite + vanilla TypeScript local-first PWA that accepts multiple Google Takeout ZIPs or an extracted folder without uploading files.
-- A working inspection engine for media/JSON classification; Google date extraction with documented fallbacks; album discovery; Motion/Live Photo companion pairing; unmatched metadata, missing companion, unclassified, and duplicate reporting.
-- A portable archive builder that copies original bytes into dated folders, writes album CSV manifests, preserves optional source JSON and unknown files, and includes human-readable `README.txt` plus full CSV/JSON reports.
-- Direct folder output through the File System Access API and a cross-browser ZIP download fallback. Source files are never edited.
-- Free complete inspection and report export, plus archive builds up to 250 media items. A $19 one-time Sociobot Exit Pass unlocks unlimited builds and SHA-256 exact duplicate matching. Return-token capture, daily verification cache, optimistic offline unlock, invalid-license reconciliation, checkout, and paste-to-restore are implemented without a product ID.
-- IndexedDB recent-run summaries with an in-app clear action; no selected file contents are persisted.
-- Versioned service-worker shell caching, cache-first local assets, network-only billing requests, offline navigation fallback, install manifest/icons, and an in-app waiting-update prompt.
-- Responsive light/dark surreal editorial UI, generated hero artwork, privacy and terms routes, reduced-motion handling, designed focus states, semantic landmarks, one h1 per route, and labelled controls.
+- `npm test` — 6/6 unit/deployment-policy tests passed.
+- `npm run build` — passed; `dist/index.html` and `dist/staticwebapp.config.json` produced. Initial JS: **199.83 KB raw / 73.41 KB gzip**; CSS: 15.43 KB raw / 4.38 KB gzip.
+- `npm run test:e2e -- --reporter=list` — **24/24 passed** across Chromium desktop and 390 px mobile. Covers normal generated Takeout ZIP conversion, CSV/JSON/archive downloads, byte preservation, empty ZIP recovery, keyboard route focus, touch targets, dark theme, desktop/mobile axe, demo isolation/reset, privacy request policy, offline reload, and 404/metadata.
+- Every claim command listed in `claims.json` was run separately with `npm run test:claims -- --grep @claim:<id>`; each passed in both browser projects.
+- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4174 .factory/evidence` — HTTP 200; title/lang/main/one h1/alt/button checks passed; zero console errors; local load 656 ms.
+- Local Lighthouse 12.8.2 mobile production preview — **100 performance, 100 accessibility**; FCP 1.28 s, LCP 1.74 s, TBT 0 ms, CLS 0. The JSON evidence is ignored under `.factory/evidence/lighthouse.json`.
+- `npx @axe-core/cli` could not be used directly because its bundled Selenium ChromeDriver is version 152 while the preinstalled Playwright Chromium is 145. Its equivalent `@axe-core/playwright` WCAG A/AA scan passed on home, privacy, and demo at desktop and 390 px; the mobile demo finding above was fixed and rechecked.
+- Deployment policy regression test confirms CSP, Permissions-Policy, immutable cache directives, manifest MIME, and 404 status override. `curl` against Vite preview confirms the manifest MIME; Vite does not apply static-host cache/security config, which is consumed from the emitted Static Web Apps config at deployment.
 
-## Verification completed
+## Run / deploy
 
-All commands were run from `/work/repo` on 2026-08-28:
+```sh
+npm ci
+npm test
+npm run build
+npm run test:e2e
+npm run test:claims
+```
 
-- `npm test` — 4/4 unit tests passed.
-- `npm run build` — passed; output at `dist/index.html`.
-- `npm run test:e2e` — desktop Chromium + 390 px mobile coverage for a real generated Takeout ZIP, paired metadata/motion media, report download, archive ZIP download, console cleanliness, privacy route, axe WCAG A/AA, and offline reload.
-- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4174 .factory/evidence` — HTTP 200, title/lang/main/alt checks passed, one h1, zero console errors; observed local load 550 ms.
-- Lighthouse 12.8.2 mobile against the production preview — **100 performance, 100 accessibility**; FCP 1.2 s, LCP 1.7 s, TBT 0 ms, CLS 0, Speed Index 1.2 s.
-- Production bundle — initial JS 196.7 KB raw / 72.7 KB gzip; CSS 14.8 KB raw / 4.3 KB gzip. Hero WebP is 29 KB at 768 px and 69 KB at 1280 px. No runtime CDN assets.
-- `npm audit` was run after dependency updates and reports no known vulnerabilities.
+Deploy the generated `dist/` directory as the existing static PWA. The repository’s static deployment configuration is embedded in `dist/staticwebapp.config.json`; do not replace the PWA or deployment class.
 
-## Generated asset provenance
+## Known constraints
 
-The accepted original source is `assets/src/archive-crossing-hero.png`; its exact prompt and review are in `assets/src/archive-crossing-hero.prompt.json`. It was generated on 2026-08-28 with the Factory Azure OpenAI image deployment via `/opt/fleet/lib/gen-image.sh`, then visually checked for artifacts, logos, people, seams, text, and misleading UI. Responsive WebP derivatives are under `public/art/`. Full visual reasoning and palette/type/motion tokens are in `.factory/design.md`.
-
-## Known gaps and next steps
-
-- The factory must register the live Sociobot paid product for slug `photo-exit-bundle`; the client intentionally contains no product ID. The production API base is already used.
-- Google changes Takeout conventions over time. Unsupported fields remain in preserved JSON, but only the documented date fields and recognized motion hints affect layout. Pilot with varied exports and add naming fixtures when new conventions appear.
-- Folder writing depends on the Chromium File System Access API. Other browsers use ZIP output, which needs memory near archive size; very large libraries should use desktop Chromium and folder output.
-- Exact SHA-256 comparison reads each media file and is intentionally an unlocked, slower pass. Probable matching in free analysis uses filename plus byte size and is labelled as such.
-- The PWA stores run summaries, not file handles or photo content, so an interrupted run must be reselected. This is a deliberate privacy and browser-permission boundary.
+- The factory must have the live Sociobot product registration for `photo-exit-bundle`; the client intentionally uses no embedded product ID.
+- Folder output requires Chromium’s File System Access API. Other browsers use ZIP output and need memory near the final archive size.
+- Google can change Takeout conventions. Unsupported fields remain preserved in selected JSON sidecars; only documented/recognized date and motion hints control archive layout.
+- The full production identity/header check is performed after static deployment has propagated, because Vite preview intentionally does not serve `staticwebapp.config.json` as response headers.

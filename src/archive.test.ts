@@ -43,4 +43,9 @@ describe('Takeout analysis', () => {
     expect(JSON.parse(report.json).format).toBe('Photo Exit Bundle report v1');
     expect(report.readme).toContain('HOW TO VERIFY');
   });
+
+  it('rejects a selection that has no photo or video files', async () => {
+    await expect(analyzeFiles([source('Takeout/Google Photos/.keep')], ['empty.zip'], { deepDuplicates: false }))
+      .rejects.toThrow('No photos or videos were found');
+  });
 });

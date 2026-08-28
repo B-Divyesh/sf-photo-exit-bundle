@@ -1,5 +1,5 @@
 /* Photo Exit Bundle service worker — intentionally dependency-free. */
-const VERSION = 'photo-exit-v1';
+const VERSION = 'photo-exit-v2';
 const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 const OFFLINE_URL = '/offline.html';
