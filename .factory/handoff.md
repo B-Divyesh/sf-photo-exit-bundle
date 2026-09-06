@@ -6,7 +6,7 @@ The release blockers from independent verification 2 are fixed and the repaired 
 
 - **Implementation SHA:** `bb0daf5` (`13df9d3` adds the product 404 and complete claim coverage; `bcdecde` fixes Azure’s clean-URL collision; `bb0daf5` keeps one-click demo entry out of real storage).
 - **Previous failed candidate:** `139e8ca6847ab39c35a149318310cda02877e021`.
-- **Documentation SHA:** recorded by the handoff commit after deployment; it does not change the deployed bundle.
+- **Documentation/report SHA:** `cec62f0`; it records the final verification and does not change the deployed bundle.
 - **Deployed bundle:** `assets/index-Dt8w8w8z.js`, 199,416 bytes raw / 73.29 kB gzip. SHA-256 `f1e7ad9c1611d2fbe4b53bcba3260d0c08c9cf5923a7cf471e61d3d719c6fc7a` matches live byte-for-byte.
 
 ## Current repair
