@@ -21,6 +21,6 @@
     "exclude": ["/404", "/assets/*", "/art/*", "/icons/*", "/manifest.webmanifest", "/sw.js", "/offline.html", "/robots.txt", "/sitemap.xml"]
   },
   "responseOverrides": {
-    "404": { "rewrite": "/404.html", "statusCode": 404 }
+    "404": { "rewrite": "/not-found.html", "statusCode": 404 }
   }
 }

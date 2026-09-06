@@ -48,7 +48,7 @@ const server = createServer(async (request, response) => {
     if (fallback && !excluded) file = safeFile(fallback.rewrite);
     else {
       const override = config.responseOverrides?.['404'];
-      file = safeFile(override?.rewrite ?? '/404.html');
+      file = safeFile(override?.rewrite ?? '/not-found.html');
       statusCode = override?.statusCode ?? 404;
     }
   }
