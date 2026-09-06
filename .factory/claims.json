@@ -21,11 +21,25 @@
     "sandbox": "fresh browser context at /demo; assert the sample photo, paired status, motion count, and album"
   },
   {
+    "id": "takeout-inputs",
+    "claim": "Reads a Google Takeout ZIP or an extracted folder in the browser.",
+    "where": "landing product promises, file picker, README",
+    "test": "npm run test:claims -- --grep @claim:takeout-inputs",
+    "sandbox": "fresh browser context; inspect a generated Takeout ZIP, then a generated extracted folder, and assert both produce downloadable reports"
+  },
+  {
     "id": "csv-export",
     "claim": "Exports the sample archive report as CSV.",
     "where": "sample report action, README",
     "test": "npm run test:claims -- --grep @claim:csv-export",
     "sandbox": "fresh browser context at /demo; download CSV and assert its header and both sample media rows"
+  },
+  {
+    "id": "free-reports",
+    "claim": "Complete CSV and JSON reports are free and include every sample media path plus review items.",
+    "where": "landing first screen, report actions, paid section, README",
+    "test": "npm run test:claims -- --grep @claim:free-reports",
+    "sandbox": "fresh browser context at /demo with no license; download both reports and assert every media row plus the unclassified review item"
   },
   {
     "id": "original-bytes",
@@ -42,11 +56,53 @@
     "sandbox": "fresh browser context at /demo; download archive ZIP and assert a dated media path and album CSV"
   },
   {
+    "id": "portable-evidence",
+    "claim": "The archive ZIP includes CSV and JSON reports, a portable README, unchanged selected Google JSON, and unclassified files for review.",
+    "where": "archive build options, how it works, README",
+    "test": "npm run test:claims -- --grep @claim:portable-evidence",
+    "sandbox": "fresh browser context at /demo; inspect the downloaded ZIP entries and README contents"
+  },
+  {
+    "id": "review-reporting",
+    "claim": "Reports identify missing metadata, missing motion companions, probable duplicates, unreadable JSON, and unclassified files.",
+    "where": "inspection results, README",
+    "test": "npm run test:claims -- --grep @claim:review-reporting",
+    "sandbox": "fresh browser context at /demo with a generated review fixture; assert each issue in the UI and downloaded JSON report"
+  },
+  {
+    "id": "folder-output",
+    "claim": "Builds the sample archive directly into a chosen folder in supported Chromium browsers.",
+    "where": "archive build action, README",
+    "test": "npm run test:claims -- --grep @claim:folder-output",
+    "sandbox": "fresh browser context at /demo with a recorded File System Access directory; assert dated media bytes and an album list are written"
+  },
+  {
+    "id": "free-archive-limit",
+    "claim": "Archive builds are free for up to 250 media items; complete reports remain available above that limit.",
+    "where": "archive limit message, paid section, README",
+    "test": "npm run test:claims -- --grep @claim:free-archive-limit",
+    "sandbox": "fresh browser context at /demo; build and inspect a 250-item ZIP, then inspect 251 items and assert reports work while archive build is gated"
+  },
+  {
     "id": "exit-pass-price",
-    "claim": "A $19 one-time Exit Pass includes unlimited archive builds and exact duplicate matching.",
+    "claim": "A $19 one-time Exit Pass builds above the 250-item free limit and adds exact duplicate matching.",
     "where": "landing facts, Exit Pass section, README",
     "test": "npm run test:claims -- --grep @claim:exit-pass-price",
-    "sandbox": "fresh browser context at /demo; assert the displayed price, one-time label, and included features"
+    "sandbox": "fresh browser context with a recorded valid-license response; assert the price, SHA-256 exact-match result, and an enabled build above the free limit"
+  },
+  {
+    "id": "local-records",
+    "claim": "Real runs store only aggregate summaries in IndexedDB; Clear run history erases them.",
+    "where": "run history, privacy page, README",
+    "test": "npm run test:claims -- --grep @claim:local-records",
+    "sandbox": "fresh browser context entered through /demo; start for real, inspect a generated fixture, assert only summary fields are stored, then clear them"
+  },
+  {
+    "id": "no-tracking",
+    "claim": "Loads no analytics, ads, tracking scripts, third-party runtime scripts, or CDN fonts.",
+    "where": "privacy page, README",
+    "test": "npm run test:claims -- --grep @claim:no-tracking",
+    "sandbox": "fresh browser context at /demo; record the complete sample, theme, and reset flow, then assert every request and loaded resource is same-origin and no cookies exist"
   },
   {
     "id": "offline-reload",

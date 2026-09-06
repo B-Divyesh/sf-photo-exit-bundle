@@ -85,7 +85,8 @@ p { margin: 0; }
 .accent { background: var(--hot); color: #fff; border-color: var(--hot) !important; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }.hero-action { margin-top: 0; min-width: 220px; }
 .hero-copy .hero-proof { font-size: .82rem; margin-top: 13px; color: var(--muted); }
-.hero-art { margin: 0; position: relative; transform: rotate(1.2deg); animation: settle 500ms cubic-bezier(.2,.8,.2,1) both; }
+.hero-art { margin: 0; position: relative; }
+.hero-art picture { display: block; transform: rotate(1.2deg); animation: settle 500ms cubic-bezier(.2,.8,.2,1) both; }
 .hero-art img { display: block; width: 100%; height: auto; border: 9px solid var(--surface); box-shadow: var(--shadow); clip-path: polygon(1% 2%, 99% 0, 100% 98%, 2% 100%); }
 .hero-art figcaption { max-width: 33ch; margin: 16px 0 0 auto; font-family: Georgia, serif; color: var(--muted); font-style: italic; }
 @keyframes settle { from { opacity: 0; transform: translateY(18px) rotate(2deg); } }

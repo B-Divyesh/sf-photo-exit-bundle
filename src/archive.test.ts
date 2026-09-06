@@ -20,6 +20,7 @@ describe('Takeout analysis', () => {
     expect(result.assets[0].album).toBe('Beach trip');
     expect(result.assets[0].archivePath).toContain('Photos/2024/01/01');
     expect(result.assets[0].issues).toEqual([]);
+    expect(result.unmatchedSidecars).toEqual([]);
   });
 
   it('flags probable duplicates and preserves them by default in a bundle plan', async () => {

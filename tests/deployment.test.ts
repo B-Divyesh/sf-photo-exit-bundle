@@ -12,6 +12,10 @@ describe('static deployment policy', () => {
     expect(routes.find((route) => route.route === '/manifest.webmanifest')?.headers['Content-Type']).toBe('application/manifest+json');
     expect((config.mimeTypes as Record<string, string>)['.webmanifest']).toBe('application/manifest+json');
     expect((config.navigationFallback as { exclude: string[] }).exclude).toContain('/404');
-    expect((config.responseOverrides as Record<string, { statusCode: number }>)['404'].statusCode).toBe(404);
+    const notFound = (config.responseOverrides as Record<string, { rewrite: string; statusCode: number }>)['404'];
+    expect(notFound).toEqual({ rewrite: '/404.html', statusCode: 404 });
+    const page = await readFile('public/404.html', 'utf8');
+    expect(page).toContain('<main id="main">');
+    expect(page).toContain('<h1>This archive page does not exist</h1>');
   });
 });

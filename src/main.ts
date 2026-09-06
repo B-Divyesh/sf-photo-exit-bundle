@@ -49,7 +49,7 @@ function shell(content: string, title = 'Photo Exit Bundle'): string {
       <nav aria-label="Main navigation">
         <a href="/demo" data-route="/demo">Demo</a>
         <a href="/#how-it-works">How it works</a>
-        <a href="/#unlock">Unlock</a>
+        <a href="/#unlock">Exit Pass</a>
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch color theme">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
         </button>
@@ -60,7 +60,7 @@ function shell(content: string, title = 'Photo Exit Bundle'): string {
     <main id="main">${content}</main>
     <footer>
       <p><span class="footer-mark">P/</span> Your photos stay on this device. <a href="/privacy" data-route="/privacy">Privacy</a> · <a href="/terms" data-route="/terms">Terms</a></p>
-      <p>Original hero artwork generated for Photo Exit Bundle. © 2026 Sociobot.</p>
+      <p>Original artwork generated for this product. Built by Param Factory · Version 1.0.0</p>
     </footer>
     <div class="toast" id="update-toast" role="status" ${waitingWorker ? '' : 'hidden'}>A new version is ready. <button type="button" id="apply-update">Update now</button></div>
   `;
@@ -98,7 +98,7 @@ function chooseMarkup(): string {
         <label class="button secondary" for="folder-input">Choose extracted folder</label>
         <input class="visually-hidden" id="folder-input" type="file" multiple />
       </div>
-      <p class="privacy-note"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2m-12 0h14v10H5z"/></svg><span><strong>Private by construction.</strong> Files are read by this browser tab and never sent to us. Close the tab to release them.</span></p>
+      <p class="privacy-note"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2m-12 0h14v10H5z"/></svg><span><strong>Files stay in this tab.</strong> They are never sent to us. Close the tab to release them.</span></p>
       ${historyMarkup()}
     </section>`;
 }
@@ -118,7 +118,7 @@ function resultsMarkup(result: AnalysisResult): string {
   return `
     <section class="workbench results" aria-labelledby="results-title">
       <div class="result-heading">
-        <div><div class="station-kicker complete">Station 2 of 4 · Inspection complete</div><h2 id="results-title">Your archive has a clear route out</h2><p>${escapeHtml(result.sourceLabels.join(', '))} · ${formatBytes(result.totalBytes)} · ${result.inputCount.toLocaleString()} source files</p></div>
+        <div><div class="station-kicker complete">Station 2 of 4 · Inspection complete</div><h2 id="results-title">Your archive plan is ready</h2><p>${escapeHtml(result.sourceLabels.join(', '))} · ${formatBytes(result.totalBytes)} · ${result.inputCount.toLocaleString()} source files</p></div>
         <button class="secondary compact" id="start-over" type="button">Choose different files</button>
       </div>
       ${notice ? `<div class="message success" role="status">${escapeHtml(notice)}</div>` : ''}
@@ -134,7 +134,7 @@ function resultsMarkup(result: AnalysisResult): string {
         </ul>
       </div>
       <section class="inspection" aria-labelledby="inspection-title">
-        <div class="section-heading"><div><div class="section-label">What survived</div><h3 id="inspection-title">Inspection ledger</h3></div><span class="method">${unlocked ? 'SHA-256 exact match' : 'Name + size duplicate check'}</span></div>
+        <div class="section-heading"><div><div class="section-label">Files and metadata</div><h3 id="inspection-title">Inspection report</h3></div><span class="method">${unlocked ? 'SHA-256 exact match' : 'Name + size duplicate check'}</span></div>
         <div class="ledger-wrap" tabindex="0" aria-label="Inspection ledger. Use arrow keys to view every column."><table><thead><tr><th>Source file</th><th>Archive date</th><th>Album</th><th>Status</th></tr></thead><tbody>
           ${displayedAssets.map((asset) => `<tr><td><strong>${escapeHtml(asset.source.name)}</strong><small>${escapeHtml(asset.source.path)}</small></td><td>${asset.date ? asset.date.toISOString().slice(0, 10) : 'Unknown'}<small>${escapeHtml(asset.dateSource)}</small></td><td>${escapeHtml(asset.album ?? '—')}</td><td>${asset.issues.length ? `<span class="status review">Review</span><small>${escapeHtml(asset.issues.join('; '))}</small>` : '<span class="status ready">Ready</span><small>Metadata paired</small>'}</td></tr>`).join('')}
         </tbody></table></div>
@@ -151,7 +151,7 @@ function resultsMarkup(result: AnalysisResult): string {
         </div>
       </details>
       <div class="report-actions" aria-label="Free report downloads">
-        <div><div class="section-label">Keep the evidence</div><h3>Download the complete migration report</h3><p>Reports are always free and include every source-to-archive path.</p></div>
+        <div><div class="section-label">Download reports</div><h3>Download the complete migration report</h3><p>Reports are always free and include every source-to-archive path.</p></div>
         <div><button class="secondary" id="download-csv" type="button">Export CSV</button><button class="secondary" id="download-json" type="button">Export JSON</button></div>
       </div>
       <form class="build-panel" id="build-form">
@@ -176,22 +176,22 @@ function resultsMarkup(result: AnalysisResult): string {
 function homeMarkup(): string {
   return `
     <section class="hero">
-      <div class="hero-copy"><div class="eyebrow"><span>Files stay in this browser</span><span>No Google sign-in</span></div><h1>Build a private archive from Google Takeout</h1><p>For families leaving Google Photos, turn an export into dated folders and album lists on this device.</p><div class="hero-actions"><a class="button primary hero-action" href="/demo" data-route="/demo">Try it with sample data <span aria-hidden="true">→</span></a><a class="button secondary hero-action" href="#start">Inspect your Takeout <span aria-hidden="true">↓</span></a></div><p class="hero-proof">Sample opens in one click · Free reports · $19 one-time unlimited builds</p></div>
+      <div class="hero-copy"><div class="eyebrow"><span>Files stay in this browser</span><span>No Google sign-in</span></div><h1>Build a private archive from Google Takeout</h1><p>For families leaving Google Photos, turn an export into dated folders and album lists on this device.</p><div class="hero-actions"><a class="button primary hero-action" href="/demo" data-route="/demo">Try it with sample data <span aria-hidden="true">→</span></a><a class="button secondary hero-action" href="#start">Inspect your Takeout <span aria-hidden="true">↓</span></a></div><p class="hero-proof">Sample opens in one click · Free reports · $19 one-time larger builds</p></div>
       <figure class="hero-art"><picture><source media="(max-width: 700px)" srcset="/art/archive-crossing-768.webp"><img src="/art/archive-crossing-1280.webp" srcset="/art/archive-crossing-768.webp 768w, /art/archive-crossing-1280.webp 1280w" sizes="(max-width: 800px) 100vw, 54vw" width="1280" height="853" alt="A cut-paper path carries photographs from a cloud filing cabinet across a moonlit sea to a warm archive house, with one photo set aside for review." fetchpriority="high" decoding="async"></picture><figcaption>The sample shows paired media, album lists, and one review item.</figcaption></figure>
     </section>
     <section class="promise" aria-label="Product promises"><p><strong>01</strong><span>Read Takeout ZIPs or folders</span></p><p><strong>02</strong><span>Pair metadata and motion files</span></p><p><strong>03</strong><span>Build dated folders and album lists</span></p></section>
     ${workspaceMarkup()}
-    <section class="explain" id="how-it-works" aria-labelledby="explain-title"><div class="section-label">A migration, not another photo service</div><h2 id="explain-title">The archive is the product.</h2><div class="explain-grid"><article><span>1</span><h3>Open locally</h3><p>Select ZIP parts or an extracted folder. The browser reads them without account automation or uploads.</p></article><article><span>2</span><h3>Inspect honestly</h3><p>See paired sidecars, dates, motion companions, albums, duplicates, and unknowns before copying anything.</p></article><article><span>3</span><h3>Leave portably</h3><p>Build ordinary dated folders plus CSV/JSON manifests and a README any relative—or future you—can understand.</p></article></div></section>
+    <section class="explain" id="how-it-works" aria-labelledby="explain-title"><div class="section-label">How it works</div><h2 id="explain-title">Build and check your local archive</h2><div class="explain-grid"><article><span>1</span><h3>Choose Takeout files</h3><p>Select ZIP parts or an extracted folder. The browser reads them without account automation or uploads.</p></article><article><span>2</span><h3>Review matches and gaps</h3><p>See paired sidecars, dates, motion companions, albums, duplicates, and unknowns before copying anything.</p></article><article><span>3</span><h3>Build portable folders</h3><p>Build ordinary dated folders plus CSV/JSON manifests and a README any relative can understand.</p></article></div></section>
     ${unlockMarkup()}`;
 }
 
 function unlockMarkup(): string {
-  return `<section class="unlock" id="unlock" aria-labelledby="unlock-title"><div><div class="section-label">One finite job, one purchase</div><h2 id="unlock-title">A complete exit for $19.</h2><p>The free tier gives every library a complete inspection, CSV/JSON reports, and archive builds up to 250 media items. The one-time Exit Pass unlocks unlimited-size archive builds and byte-identical SHA-256 duplicate checks on this device.</p><p class="fine-print">No subscription. Sociobot/Dodo is the merchant of record; refunds are handled there and revoke the license.</p></div><div class="ticket"><span class="ticket-label">Exit Pass</span><strong>$19 <small>one time</small></strong><ul><li>Unlimited archive size</li><li>Exact duplicate matching</li><li>Use on another device with your license</li></ul>${unlocked ? '<p class="license-active">✓ Exit Pass active</p>' : `<a class="button accent" href="${checkoutUrl()}">Buy the Exit Pass</a><details><summary>Have a license? Restore it</summary><form id="license-form"><label for="license-token">License token</label><input id="license-token" name="license" autocomplete="off" required><button class="secondary" type="submit" aria-label="Verify pasted license">Verify license</button><p id="license-status" aria-live="polite"></p></form></details>`}<p><a href="/privacy" data-route="/privacy">Privacy</a> · <a href="/terms" data-route="/terms">Terms</a></p></div></section>`;
+  return `<section class="unlock" id="unlock" aria-labelledby="unlock-title"><div><div class="section-label">One finite job, one purchase</div><h2 id="unlock-title">Choose the $19 Exit Pass</h2><p>The free tier gives every library a complete inspection, CSV/JSON reports, and archive builds up to 250 media items. The one-time Exit Pass enables larger archive builds and byte-identical SHA-256 duplicate checks on this device.</p><p class="fine-print">No subscription. Sociobot/Dodo is the merchant of record; refunds are handled there and revoke the license.</p></div><div class="ticket"><span class="ticket-label">Exit Pass</span><strong>$19 <small>one time</small></strong><ul><li>Build above the free limit</li><li>Exact duplicate matching</li><li>Use on another device with your license</li></ul>${unlocked ? '<p class="license-active">✓ Exit Pass active</p>' : `<a class="button accent" href="${checkoutUrl()}">Buy the Exit Pass</a><details><summary>Have a license? Restore it</summary><form id="license-form"><label for="license-token">License token</label><input id="license-token" name="license" autocomplete="off" required><button class="secondary" type="submit" aria-label="Verify pasted license">Verify license</button><p id="license-status" aria-live="polite"></p></form></details>`}<p><a href="/privacy" data-route="/privacy">Privacy</a> · <a href="/terms" data-route="/terms">Terms</a></p></div></section>`;
 }
 
 function legalMarkup(kind: 'privacy' | 'terms'): string {
   if (kind === 'privacy') return `<article class="legal"><a href="/" data-route="/">← Back to the archive builder</a><h1>Privacy, in plain language</h1><p class="updated">Effective August 28, 2026</p><h2>Your files stay in this browser</h2><p>Photo Exit Bundle processes only files you select. Photos, videos, JSON metadata, filenames, dates, reports, and archive contents are not uploaded or stored by us.</p><h2>Local records</h2><p>Real runs store only aggregate summaries in IndexedDB. License tokens and daily license checks use localStorage. Selected files are never persisted. Clear history in the app or remove site data to erase these records.</p><h2>Billing and contact</h2><p>Buying or checking an Exit Pass contacts Sociobot’s billing API. Sociobot/Dodo handles payment as merchant of record. The app has no analytics, ads, CDN fonts, or tracking scripts. Email privacy@sociobot.in with questions.</p></article>`;
-  return `<article class="legal"><a href="/" data-route="/">← Back to the archive builder</a><h1>Terms of use</h1><p class="updated">Effective August 28, 2026</p><h2>The service</h2><p>Photo Exit Bundle locally inspects and reorganizes selected Google Takeout exports. It does not access Google accounts, host galleries, recognize faces, or support every undocumented metadata field.</p><h2>Your responsibility</h2><p>Keep your original Takeout until you check the report and open samples on another machine. You must have permission to process the files you select.</p><h2>Exit Pass</h2><p>The $19 one-time Exit Pass enables unlimited archive builds and exact duplicate checking. Sociobot/Dodo handles checkout and refunds. Invalid or revoked licenses stop unlocking paid features; reports remain available.</p><h2>Warranty and contact</h2><p>The software is provided as is to the extent permitted by law. Email support@sociobot.in with questions.</p></article>`;
+  return `<article class="legal"><a href="/" data-route="/">← Back to the archive builder</a><h1>Terms of use</h1><p class="updated">Effective August 28, 2026</p><h2>The service</h2><p>Photo Exit Bundle locally inspects and reorganizes selected Google Takeout exports. It does not access Google accounts, host galleries, recognize faces, or support every undocumented metadata field.</p><h2>Your responsibility</h2><p>Keep your original Takeout until you check the report and open samples on another machine. You must have permission to process the files you select.</p><h2>Exit Pass</h2><p>The $19 one-time Exit Pass enables archive builds above the free limit and exact duplicate checking. Sociobot/Dodo handles checkout and refunds. Invalid or revoked licenses stop paid features; reports remain available.</p><h2>Warranty and contact</h2><p>The software is provided as is to the extent permitted by law. Email support@sociobot.in with questions.</p></article>`;
 }
 
 function notFoundMarkup(): string {
@@ -418,6 +418,7 @@ function applySavedTheme(): void {
 async function registerServiceWorker(): Promise<void> {
   if (!('serviceWorker' in navigator) || import.meta.env.DEV) return;
   const registration = await navigator.serviceWorker.register('/sw.js');
+  if (!registration) return;
   if (registration.waiting) { waitingWorker = registration.waiting; render(); }
   registration.addEventListener('updatefound', () => {
     const worker = registration.installing;

@@ -1,0 +1,30 @@
+{
+  "slug": "photo-exit-bundle",
+  "title": "Photo Exit Bundle",
+  "territory": "utilities",
+  "user": "Families leaving or reducing reliance on Google Photos who need a usable local photo archive without losing albums, dates, motion companions, or a simple way to share with mixed-device relatives.",
+  "evidence": [
+    {
+      "url": "https://hn.algolia.com/api/v1/items/42824871",
+      "date": "2025-01-25",
+      "quote_or_summary": "A Pixel-owning parent has outgrown Google storage, worries about account lockout, and explicitly wishes for an easy way to back up Google Photos."
+    },
+    {
+      "url": "https://github.com/rclone/rclone/issues/369",
+      "date": "2016-02-24",
+      "quote_or_summary": "The request notes that Google Photos and Drive behavior differ and that a 300k-photo collection makes manual migration impractical (37 reactions, 171 comments)."
+    }
+  ],
+  "recurrence": "Account-lockout anxiety, growing family libraries, and storage bills turn this into a recurring exit problem; the rclone thread's long discussion shows the integration is persistently awkward.",
+  "current_workaround": "Download Takeout ZIPs, use rclone scripts, switch to another cloud, or self-host Immich/PhotoPrism and manually repair metadata.",
+  "incumbents_and_gap": "Google Takeout exports data and rclone copies files; Immich and PhotoPrism host libraries. The missing middle is a local, explainable migration report that identifies what survived and what needs user attention.",
+  "smallest_useful_product": "A local Takeout-to-folder converter that pairs JSON metadata and motion-video files, recreates dated folders/album manifests, produces a duplicate and missing-companion report, and writes a portable README. Non-goals: Google API scraping, hosted galleries, or face recognition.",
+  "success_measure": "At least 80% of pilot exports finish with fewer than 1% unclassified assets and users open the resulting archive on a second machine.",
+  "artifact_class": "pwa-offline",
+  "monetization": "one-time — it is a finite migration with no credible reason to retain family photos.",
+  "constraints": "Runs entirely on user-selected files; do not claim full fidelity for unsupported Google metadata; preserve originals; comply with Google Takeout formats and avoid account automation.",
+  "est_build_effort": "M",
+  "why_distinct": "This is an exit-quality checker and portable archive builder, not a Google Photos clone or another sync daemon.",
+  "confidence": 4,
+  "state": "RESEARCHED"
+}

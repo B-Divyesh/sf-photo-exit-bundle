@@ -11,15 +11,15 @@ Try the one-click sample at <https://photo-exit-bundle.sociobot.in/demo>. The sa
 ## What it does
 
 - Reads one or more untouched Takeout ZIP parts, or an extracted Takeout folder.
-- Uses Google `photoTakenTime`/`creationTime`, then filename or file date fallbacks.
+- Uses Google dates when present and reports files whose dates need review.
 - Pairs common Motion Photo and Live Photo naming patterns with their video companions.
 - Recreates `Photos/YYYY/MM/DD/` and `Photos/Unknown date/` folders.
-- Writes album CSV manifests without duplicating another copy just for the album list.
+- Writes album CSV lists that point to files in the dated folders.
 - Reports paired/missing sidecars, probable or byte-identical duplicates, missing companions, unreadable JSON, and unclassified files.
-- Builds directly into a chosen folder in supported Chromium browsers, with a portable ZIP fallback.
+- Builds directly into a chosen folder in supported Chromium browsers, with a ZIP fallback.
 - Works offline after first load and keeps only aggregate recent-run summaries in IndexedDB.
 
-The free tier provides complete analysis, complete CSV/JSON reports, and archives up to 250 media items. The $19 one-time Exit Pass unlocks unlimited archive builds and SHA-256 exact duplicate matching. Billing uses only the Sociobot hosted checkout and license API.
+The free tier provides complete analysis, complete CSV/JSON reports, and archives up to 250 media items. The $19 one-time Exit Pass enables larger archive builds and SHA-256 exact duplicate matching. Billing uses only the Sociobot hosted checkout and license API.
 
 ## Run locally
 
@@ -63,9 +63,9 @@ Keep the original Takeout until the generated report count looks right and repre
 
 ## Privacy and limitations
 
-The app has no analytics, tracking, third-party runtime scripts, CDN fonts, Google account automation, or hosted photo storage. Selected file handles live only for the tab. Recent aggregate run summaries and license state are local browser data; see `/privacy` and `/terms` in the app.
+The app has no analytics, tracking, third-party runtime scripts, CDN fonts, Google account automation, or hosted photo storage. Selected files are not saved. Recent aggregate run summaries and license state are local browser data; see `/privacy` and `/terms` in the app.
 
-Google’s undocumented or unsupported metadata is preserved in original JSON when selected, but not all fields influence layout. Motion pairing relies on adjacent filenames and recognized metadata hints. HEIC, RAW, and video formats are preserved rather than transcoded. ZIP output needs memory near the final archive size; direct folder output is preferred for large exports.
+Google’s unsupported metadata stays in the original JSON when selected, but not all fields affect the folder layout. Motion pairing uses nearby filenames and recognized metadata hints. Source media is copied rather than transcoded. ZIP output needs memory near the final archive size; direct folder output is preferred for large exports.
 
 ## Design and license
 

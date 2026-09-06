@@ -16,7 +16,7 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 5'], viewport: { width: 390, height: 844 } } },
   ],
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4173',
+    command: 'npm run build && node tests/serve-dist.mjs',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: true,
     timeout: 120_000,

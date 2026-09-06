@@ -1,10 +1,10 @@
 /* Photo Exit Bundle service worker — intentionally dependency-free. */
-const VERSION = 'photo-exit-v2';
+const VERSION = 'photo-exit-v3';
 const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 const OFFLINE_URL = '/offline.html';
 const STATIC_URLS = [
-  '/', OFFLINE_URL, '/manifest.webmanifest',
+  '/', OFFLINE_URL, '/offline.css', '/404.html', '/404.css', '/manifest.webmanifest',
   '/art/archive-crossing-768.webp', '/art/archive-crossing-1280.webp',
   '/icons/icon-192.png', '/icons/icon-512.png', '/icons/icon-maskable-512.png',
 ];

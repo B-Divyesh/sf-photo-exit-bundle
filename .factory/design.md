@@ -49,5 +49,6 @@ On entry, the illustration and workbench settle into place with a 240 ms transfo
 - Generator: Factory Azure image deployment via `/opt/fleet/lib/gen-image.sh` (OpenAI image model), generated 2026-08-28.
 - License/provenance: original AI-generated artwork for this product; no input artwork, brands, real people, or copyrighted characters.
 - Delivery: source PNG retained under `assets/src/` with prompt sidecar; responsive WebP derivatives under `public/art/`, each hero candidate visually reviewed for text artifacts, seams, brands, and misleading UI.
+- Social preview: `public/art/photo-exit-social.jpg` is a 1200×630 center crop of the accepted original. It introduces no new generated content.
 
 Icons and marks are hand-authored inline SVG using simple archive/photo geometry. They are product UI, not generated imagery. The footer discloses the generated hero artwork.

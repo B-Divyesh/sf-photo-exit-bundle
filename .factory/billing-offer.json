@@ -1,0 +1,15 @@
+{
+  "slug": "photo-exit-bundle",
+  "name": "Photo Exit Bundle Exit Pass",
+  "price_minor": 1900,
+  "currency": "USD",
+  "price_type": "one_time_price",
+  "return_url": "https://photo-exit-bundle.sociobot.in/",
+  "price_evidence": "The live product, terms, and checkout action advertise the Exit Pass at $19 one time.",
+  "paid_features": [
+    "Archive builds above the 250-media free limit",
+    "SHA-256 exact duplicate matching",
+    "License restore on another device"
+  ],
+  "license_validation_path": "https://api.sociobot.in/api/v1/products/photo-exit-bundle/verify"
+}

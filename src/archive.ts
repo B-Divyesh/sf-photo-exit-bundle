@@ -146,8 +146,9 @@ export async function analyzeFiles(
     const stripped = withoutMetadataSuffix(cleanPath(file.path)).toLowerCase();
     const parent = folder(stripped);
     const base = stripped.split('/').pop() ?? stripped;
-    metadataByKey.set(stripped, { file, metadata, used: false });
-    metadataByKey.set(`${parent}/${fileStem(base)}`, { file, metadata, used: false });
+    const record = { file, metadata, used: false };
+    metadataByKey.set(stripped, record);
+    metadataByKey.set(`${parent}/${fileStem(base)}`, record);
     options.onProgress?.(++done, total, `Reading metadata ${done} of ${metadataFiles.length}`);
   }
 

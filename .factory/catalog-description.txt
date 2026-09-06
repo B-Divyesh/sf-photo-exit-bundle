@@ -1,0 +1,1 @@
+Build dated folders, album lists, and reports from Google Takeout without uploading family photos.
