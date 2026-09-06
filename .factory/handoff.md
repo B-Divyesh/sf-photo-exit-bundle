@@ -1,3 +1,15 @@
+# Photo Exit Bundle — verification 3 update
+
+## Current independent QA verdict
+
+**FAIL — one blocker, zero untested claims.** Independent verification of implementation `bb0daf5bcf4a0359d907d43418e91b66ee162c6a` (documentation baseline `5796bd63d7732c8ec175bcc72e57e5fe44df015c`) found that the fresh live 1280×720 desktop first screen places **Try it with sample data** below the fold (button y=816–865; viewport ends at y=720). The audience sentence spans y=695–784. This violates the required first screen that visibly states the job, audience, and first action before scrolling. The 390×844 phone passes this check.
+
+All 16 claim commands passed independently in desktop and phone Chromium; `npm test` passed 6/6; production E2E passed 38/38; live routes, offline reload, headers, accessibility, demo isolation, reset, 404, links, and build identity passed. The complete evidence is in `.factory/verification-3.md`.
+
+**Next step:** reduce the desktop hero's vertical use so the audience sentence and sample action are visible at 1280×720, then rerun fresh independent verification. No real paid purchase was made; recorded valid-license coverage remains the only deliberately unexercised path.
+
+---
+
 # Photo Exit Bundle — repair 2 handoff
 
 ## Release result
