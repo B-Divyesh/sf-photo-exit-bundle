@@ -1,51 +1,98 @@
-# Photo Exit Bundle — independent QA result: FAIL
+# Photo Exit Bundle — repair 2 handoff
 
-**Candidate:** `139e8ca6847ab39c35a149318310cda02877e021`
-**Live URL:** https://photo-exit-bundle.sociobot.in
-**Independent verification date:** 2026-08-28 UTC
+## Release result
 
-**Do not release.** Fresh independent verification found two release blockers despite passing local build, unit, E2E, and required listed claim tests:
+The release blockers from independent verification 2 are fixed and the repaired product is live at <https://photo-exit-bundle.sociobot.in>.
 
-1. Live `/404` serves Azure's default error page rather than the product's styled 404. It has a critical axe failure, no product H1, and CORS/console errors at desktop and 390 px.
-2. `.factory/claims.json` does not cover every visible/README reliance claim. Free reports, the 250-item free limit, direct-folder output, and no analytics/tracking/CDN fonts are examples without a tagged observable claim test.
+- **Implementation SHA:** `bb0daf5` (`13df9d3` adds the product 404 and complete claim coverage; `bcdecde` fixes Azure’s clean-URL collision; `bb0daf5` keeps one-click demo entry out of real storage).
+- **Previous failed candidate:** `139e8ca6847ab39c35a149318310cda02877e021`.
+- **Documentation SHA:** recorded by the handoff commit after deployment; it does not change the deployed bundle.
+- **Deployed bundle:** `assets/index-Dt8w8w8z.js`, 199,416 bytes raw / 73.29 kB gzip. SHA-256 `f1e7ad9c1611d2fbe4b53bcba3260d0c08c9cf5923a7cf471e61d3d719c6fc7a` matches live byte-for-byte.
 
-The live HTML/JS/CSS are byte-identical to the candidate build, so B1 is a real deployment configuration failure, not an old deployment. Primary live routes, one-click demo, demo isolation, offline reload, same-origin privacy flow, immutable caches, headers, rate limiting, and mobile Lighthouse (94 performance / 100 accessibility) otherwise passed. Full evidence and reproduction are in [`.factory/verification-2.md`](verification-2.md).
+## Current repair
 
----
+### Live 404
 
-# Photo Exit Bundle — repair handoff
+The prior response override rewrote a missing `/404` back to `/404`, so Azure served its default page. Rewriting to a physical `404.html` then exposed an Azure clean-URL collision: `/404` mapped to that file and returned 200. The final configuration excludes `/404` from SPA fallback and rewrites a real 404 response to the non-colliding internal `/not-found.html`, preserving status 404.
 
-## Release repair
+The standalone page uses the product’s archive-paper visual system, local CSS, one h1, a main landmark, keyboard focus styles, 44 px targets, dark treatment, reduced-motion handling, and routes back to the builder and sample. The browser regression runs through a local static-host emulator that applies the emitted fallback and response-override behavior; it asserts the 404 status, product title and h1, same-origin resources, no failed subresources or unexpected console errors, and zero serious/critical axe findings.
 
-This repair addresses every finding in the independent verification of candidate `876c7122d88607919528b0aface5823213ffbfd3` (report commit `ee30ca4c6b1f7e383bf70a8b8551993fce9328c2`). The repair commits are `e6a98597df34509b0fe65c96b41dbcb51f62d82d` and `e97ac8580d79c3f393dbf5d4bdc2cf7bdd41e6b6`; deployment evidence was recorded in `d686def`. The normal Takeout workflow, reports, archive output, paid boundary, offline shell, and visual thesis were retained.
+Live evidence on desktop and 390 px phone:
 
-### Fixed findings
+- `GET /404` returns HTTP **404** with title `Page not found — Photo Exit Bundle` and h1 `This archive page does not exist`.
+- No Azure, CDN, or other cross-origin asset is requested.
+- No subresource or page errors occur. Chromium’s expected generic log for the deliberate main-document 404 is classified separately.
+- Axe WCAG A/AA reports **0 serious or critical** violations.
 
-- **B1 — claims:** Added [`.factory/claims.json`](claims.json) with eight observable customer-facing claims. Each has one tagged Playwright test and was run individually in a fresh desktop and 390 px browser context.
-- **B2 — isolated one-click demo:** `/demo` and `/?demo=1` now build a realistic in-memory family-weekend sample immediately. The persistent **Demo — sample data, nothing is saved** banner includes Reset demo and Start for real. Demo mode uses the `demo:photo-exit-bundle:active` session namespace; it does not open/read/write normal IndexedDB history, licenses, or selected files. Details are in [`.factory/demo.md`](demo.md).
-- **B3 — cold-page copy:** The landing h1 is now “Build a private archive from Google Takeout.” The first sentence names families leaving Google Photos, and the first primary action is **Try it with sample data**. The copy audit is in [`.factory/copy-audit.md`](copy-audit.md).
-- **H1 / M1 — response policy:** Added `public/staticwebapp.config.json`, emitted as `dist/staticwebapp.config.json`, with CSP, Permissions-Policy, security headers, immutable caching for hashed/static assets, `application/manifest+json`, no-cache service worker, navigation fallback, and an HTTP 404 override.
-- **M2 — routes:** Added `/demo`, designed `/404`, route-specific title/description/canonical metadata, route focus movement and live announcement, `robots.txt`, and `sitemap.xml`.
-- **M3 — touch targets:** Brand, navigation, ticket legal links, and footer legal links now provide 44 px targets. The browser regression checks every visible landing-page link at desktop and 390 px.
-- **M4 — empty Takeout:** Analysis now rejects a media-empty ZIP/folder with a clear recovery message rather than presenting a successful archive. Unit and browser regression coverage include `Takeout/Google Photos/.keep`.
-- **M5 — LCP:** Kept the responsive WebP hero, removed unnecessary bundled copy weight, and held the initial bundle below the 200 KB raw limit.
-- **Additional accessibility repair:** Mobile axe found the horizontally scrolling demo ledger was not keyboard-focusable. It now has a label and keyboard focus, and desktop/mobile axe scans cover home, legal, and demo routes.
+### Claims and demo isolation
 
-## Verification evidence
+`.factory/claims.json` now lists 16 public claims. Each ID occurs in exactly one tagged Playwright test and every exact listed command passes in both desktop Chromium and the 390 px project. Added outcome coverage includes:
 
-All commands were run from `/work/repo` on 2026-08-28 after `npm ci` (0 vulnerabilities):
+- Takeout ZIP and extracted-folder inputs.
+- Free complete CSV and JSON reports.
+- The exact free boundary: a 250-media archive builds; at 251, full reports remain available while building is gated.
+- Direct File System Access folder output with inspected written paths and bytes.
+- Portable README, reports, unchanged selected Google JSON, and review files inside the ZIP.
+- Missing metadata, missing motion companion, duplicate, unreadable JSON, and unclassified-file reporting.
+- No analytics, ads, tracking scripts, third-party runtime scripts, CDN fonts, or cookies during the full sample/reset flow.
+- Real-run IndexedDB records contain only aggregate summary fields and Clear run history erases them.
+- A recorded valid-license response enables a 251-item build and SHA-256 byte-identical duplicate result.
 
-- `npm test` — 6/6 unit/deployment-policy tests passed.
-- `npm run build` — passed; `dist/index.html` and `dist/staticwebapp.config.json` produced. Initial JS: **199.83 KB raw / 73.41 KB gzip**; CSS: 15.43 KB raw / 4.38 KB gzip.
-- `npm run test:e2e -- --reporter=list` — **24/24 passed** across Chromium desktop and 390 px mobile. Covers normal generated Takeout ZIP conversion, CSV/JSON/archive downloads, byte preservation, empty ZIP recovery, keyboard route focus, touch targets, dark theme, desktop/mobile axe, demo isolation/reset, privacy request policy, offline reload, and 404/metadata.
-- Every claim command listed in `claims.json` was run separately with `npm run test:claims -- --grep @claim:<id>`; each passed in both browser projects.
-- `/opt/fleet/lib/verify-url.sh http://127.0.0.1:4174 .factory/evidence` — HTTP 200; title/lang/main/one h1/alt/button checks passed; zero console errors; local load 656 ms.
-- Local Lighthouse 12.8.2 mobile production preview — **100 performance, 100 accessibility**; FCP 1.28 s, LCP 1.74 s, TBT 0 ms, CLS 0. The JSON evidence is ignored under `.factory/evidence/lighthouse.json`.
-- `npx @axe-core/cli` could not be used directly because its bundled Selenium ChromeDriver is version 152 while the preinstalled Playwright Chromium is 145. Its equivalent `@axe-core/playwright` WCAG A/AA scan passed on home, privacy, and demo at desktop and 390 px; the mobile demo finding above was fixed and rechecked.
-- Deployment policy regression test confirms CSP, Permissions-Policy, immutable cache directives, manifest MIME, and 404 status override. `curl` against Vite preview confirms the manifest MIME; Vite does not apply static-host cache/security config, which is consumed from the emitted Static Web Apps config at deployment.
-- Deployed with `/opt/fleet/lib/deploy-static.sh photo-exit-bundle /work/repo/dist` to the existing Azure Static Web App. Live identity check at `https://photo-exit-bundle.sociobot.in` passed on the repaired `index-NB8E1BLE.js` bundle; `verify-url.sh` reported HTTP 200, 836 ms local browser load, zero console errors, title/lang/main/one h1/alt/button checks passed. Live headers confirm CSP, Permissions-Policy, immutable JS caching, `application/manifest+json`, and `/404` returns HTTP 404.
+The paid claim now states the observable promise: the $19 one-time Exit Pass builds above the 250-item free limit and adds exact duplicate matching. The implementation still has no upper paid item gate, but the page no longer makes an unbounded quantitative claim that a finite sandbox cannot prove.
 
-## Run / deploy
+The one-click demo test now starts from the landing action, confirms the persistent sample banner and populated output, resets it, leaves demo, and checks that no real IndexedDB exists. `getRuns()` no longer creates an empty real database just by opening a new landing page.
+
+### Additional defect found by the new tests
+
+Matched Google JSON sidecars were indexed as two separate record objects. Marking one as used left the duplicate record incorrectly reported as unmatched. Both lookup keys now share one record, and unit plus browser review-fixture tests prove matched sidecars are not counted as unmatched.
+
+## Earlier findings disposition
+
+| Finding | Current disposition |
+| --- | --- |
+| Verification 1 B1, missing claims | Fixed; 16 listed claims, 16 individually passing commands. |
+| Verification 1 B2, missing demo | Fixed; one click from landing, persistent label, reset, exit, no real storage. |
+| Verification 1 B3, metaphorical first screen | Fixed; job, audience, and first action are plain before scrolling. Full copy audit is in `.factory/copy-audit.md`. |
+| Verification 1 H1, missing policy headers | Fixed live; CSP, Permissions-Policy, HSTS, nosniff, referrer policy, and frame denial are present. |
+| Verification 1 M1, caching and manifest MIME | Fixed live; hashed assets are one-year immutable, service worker is no-cache, manifest is `application/manifest+json`. |
+| Verification 1 M2, route metadata and 404 | Fixed; route titles, focus, robots, sitemap, and live styled HTTP 404 pass. |
+| Verification 1 M3, touch targets | Fixed; desktop and phone browser regression remains green. |
+| Verification 1 M4, media-empty input | Fixed; unit and browser recovery tests reject it without enabling a build. |
+| Verification 1 M5, LCP | Fixed; final live mobile LCP is 1.4 s. |
+| Verification 1 documentation gaps | Fixed; researched brief, complete copy audit, catalog description, and handoff are present. |
+| Verification 2 B1, Azure default 404 | Fixed at the deployed-host configuration cause and verified cold. |
+| Verification 2 B2, incomplete claim inventory | Fixed with observable browser outcomes rather than copy/source-string checks. |
+
+## Verification
+
+Final clean setup and local checks on September 6, 2026:
+
+- `npm ci` — passed; 60 packages installed, 0 vulnerabilities.
+- `npm test` — **6/6 passed**.
+- `npm run build` — passed; `dist/` contains the static site. Initial JS is **199,416 bytes raw / 73.29 kB gzip**; CSS is **15.38 kB raw / 4.38 kB gzip**.
+- `npm run test:e2e -- --reporter=line` — **38/38 passed** across desktop and 390 px Chromium.
+- Every one of the 16 commands in `.factory/claims.json` was run separately after the final implementation change — **all passed in both projects**.
+- `/opt/fleet/lib/verify-url.sh` against the local static-host emulator — passed; HTTP 200, 631 ms load, zero console errors, title/lang/main/h1/alt/button checks passed.
+- Local Lighthouse 12.8.2 mobile — **96 performance / 100 accessibility / 100 best practices / 100 SEO**; FCP 2.0 s, LCP 2.4 s, TBT 0 ms, CLS 0.
+- `@axe-core/playwright` WCAG A/AA scans cover home light/dark, privacy, demo, and the standalone 404 at desktop and phone sizes; **0 serious or critical** findings. This is the supported equivalent to the attached axe CLI requirement with the pinned Playwright browser.
+
+Final live checks after deployment:
+
+- `verify-url.sh https://photo-exit-bundle.sociobot.in` — passed; 940 ms load, zero console errors, title/lang/main/one h1/alt/button checks passed.
+- Live Lighthouse 12.8.2 mobile — **100 performance / 100 accessibility / 100 best practices / 100 SEO**; FCP 1.2 s, LCP 1.4 s, TBT 0 ms, CLS 0.
+- Fresh desktop and 390 px contexts show the job, audience, and **Try it with sample data** action before scrolling.
+- Both contexts enter the sample, show two photos, one motion pair, an album, the persistent demo label, reset successfully, return to the real empty picker, and create no real database.
+- A fresh 390 px live `/demo` context reloads offline with the sample, demo banner, and offline status visible; no page errors.
+- `/privacy`, `/terms`, and `/demo` return 200 with route-specific titles and one h1.
+- The live bundle hash exactly matches `dist/`; the manifest MIME, immutable asset cache, and security headers are correct.
+
+## Product metadata and billing
+
+- `.factory/catalog-description.txt` is 98 characters plus newline, verb-first, and copied to `/work/.evidence/catalog-description.txt`.
+- The existing $19 one-time offer is preserved. Public metadata is in `.factory/billing-offer.json` and copied to `/work/.evidence/billing-offer.json`.
+- The live Sociobot checkout endpoint returns the expected hosted-checkout redirect. No purchase was made; checkout redirect alone is not treated as entitlement proof. Paid behavior is tested with a recorded valid license-verification response and no provider credential.
+
+## Run and deploy
 
 ```sh
 npm ci
@@ -55,11 +102,11 @@ npm run test:e2e
 npm run test:claims
 ```
 
-Deploy the generated `dist/` directory as the existing static PWA. The repository’s static deployment configuration is embedded in `dist/staticwebapp.config.json`; do not replace the PWA or deployment class.
+Deploy `dist/` with the product’s existing static deployment configuration. The deployed 404 depends on `dist/staticwebapp.config.json`, `dist/not-found.html`, and `dist/404.css` remaining together.
 
 ## Known constraints
 
-- The factory must have the live Sociobot product registration for `photo-exit-bundle`; the client intentionally uses no embedded product ID.
-- Folder output requires Chromium’s File System Access API. Other browsers use ZIP output and need memory near the final archive size.
-- Google can change Takeout conventions. Unsupported fields remain preserved in selected JSON sidecars; only documented/recognized date and motion hints control archive layout.
-- Vite preview intentionally does not serve `staticwebapp.config.json` response headers; the final live Static Web Apps checks above are the deployment evidence.
+- Folder output requires the File System Access API in a supported Chromium desktop browser. Other browsers use ZIP output.
+- ZIP output is built in browser memory; large exports should use folder output where available.
+- Google can change Takeout conventions. Unsupported fields remain in selected original JSON, but only recognized date and motion hints affect layout.
+- A real paid checkout and returned production license were not exercised. The live checkout redirect and client contract are present; entitlement behavior is covered with a recorded verification response.
