@@ -3,6 +3,15 @@ import type { RunSummary } from './types';
 const DB_NAME = 'photo-exit-bundle';
 const STORE = 'run-history';
 
+async function databaseExists(): Promise<boolean> {
+  if (!('databases' in indexedDB)) return true;
+  try {
+    return (await indexedDB.databases()).some((database) => database.name === DB_NAME);
+  } catch {
+    return true;
+  }
+}
+
 function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
@@ -26,6 +35,7 @@ export async function saveRun(run: RunSummary): Promise<void> {
 }
 
 export async function getRuns(): Promise<RunSummary[]> {
+  if (!(await databaseExists())) return [];
   const database = await openDatabase();
   const values = await new Promise<RunSummary[]>((resolve, reject) => {
     const request = database.transaction(STORE).objectStore(STORE).getAll();
@@ -37,6 +47,7 @@ export async function getRuns(): Promise<RunSummary[]> {
 }
 
 export async function clearRuns(): Promise<void> {
+  if (!(await databaseExists())) return;
   const database = await openDatabase();
   await new Promise<void>((resolve, reject) => {
     const transaction = database.transaction(STORE, 'readwrite');

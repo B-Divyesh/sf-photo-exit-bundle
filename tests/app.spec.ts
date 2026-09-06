@@ -98,7 +98,10 @@ test('@claim:takeout-inputs reads a Takeout ZIP and an extracted folder', async 
 test('@claim:demo-sandbox opens a sample archive without creating real run history', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (request) => requests.push(request.url()));
-  await page.goto('/demo');
+  await page.goto('/');
+  expect(await page.evaluate(async () => (await indexedDB.databases()).map((database) => database.name))).not.toContain('photo-exit-bundle');
+  await page.getByRole('link', { name: /Try it with sample data/ }).click();
+  await expect(page).toHaveURL(/\/demo$/);
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Your archive plan is ready' })).toBeVisible();
   await expect(page.getByText('Maya_20240721.MP.jpg', { exact: true })).toBeVisible();

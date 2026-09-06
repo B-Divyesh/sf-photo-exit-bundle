@@ -194,18 +194,12 @@ function legalMarkup(kind: 'privacy' | 'terms'): string {
   return `<article class="legal"><a href="/" data-route="/">← Back to the archive builder</a><h1>Terms of use</h1><p class="updated">Effective August 28, 2026</p><h2>The service</h2><p>Photo Exit Bundle locally inspects and reorganizes selected Google Takeout exports. It does not access Google accounts, host galleries, recognize faces, or support every undocumented metadata field.</p><h2>Your responsibility</h2><p>Keep your original Takeout until you check the report and open samples on another machine. You must have permission to process the files you select.</p><h2>Exit Pass</h2><p>The $19 one-time Exit Pass enables archive builds above the free limit and exact duplicate checking. Sociobot/Dodo handles checkout and refunds. Invalid or revoked licenses stop paid features; reports remain available.</p><h2>Warranty and contact</h2><p>The software is provided as is to the extent permitted by law. Email support@sociobot.in with questions.</p></article>`;
 }
 
-function notFoundMarkup(): string {
-  return `<article class="legal not-found"><p class="station-kicker">404 · Not found</p><h1>This archive page does not exist</h1><p>Return to the archive builder or open the sample archive.</p><p class="not-found-actions"><a class="button primary" href="/" data-route="/">Go to archive builder</a><a class="button secondary" href="/demo" data-route="/demo">Try sample data</a></p></article>`;
-}
-
 function setRouteMetadata(path: string): void {
   const metadata = path === '/privacy'
     ? { title: 'Privacy — Photo Exit Bundle', description: 'How Photo Exit Bundle handles local browser data and billing.' }
     : path === '/terms'
       ? { title: 'Terms — Photo Exit Bundle', description: 'Terms for using Photo Exit Bundle to inspect Google Takeout files.' }
-      : path === '/404'
-        ? { title: 'Page not found — Photo Exit Bundle', description: 'Return to Photo Exit Bundle.' }
-        : isDemo()
+      : isDemo()
           ? { title: 'Demo — Photo Exit Bundle', description: 'Try a private sample Google Takeout archive in your browser.' }
           : { title: 'Photo Exit Bundle — build a local Takeout archive', description: 'Build a dated local archive from Google Takeout without uploading family photos.' };
   document.title = metadata.title;
@@ -217,7 +211,6 @@ function render(moveFocus = false): void {
   const path = window.location.pathname;
   setRouteMetadata(path);
   if (path === '/privacy' || path === '/terms') root.innerHTML = shell(legalMarkup(path.slice(1) as 'privacy' | 'terms'));
-  else if (path === '/404') root.innerHTML = shell(notFoundMarkup());
   else root.innerHTML = shell(homeMarkup());
   bindEvents();
   if (moveFocus) requestAnimationFrame(() => {

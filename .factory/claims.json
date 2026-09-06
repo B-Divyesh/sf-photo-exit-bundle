@@ -4,7 +4,7 @@
     "claim": "Try a sample archive in one click; sample data is not saved as your run history.",
     "where": "landing hero, demo banner, README",
     "test": "npm run test:claims -- --grep @claim:demo-sandbox",
-    "sandbox": "fresh browser context at /demo; assert seeded result, demo namespace, no real run-history database, and same-origin requests"
+    "sandbox": "fresh browser context at the landing page; click the sample action once, then assert seeded results, demo namespace, no real run-history database, reset, exit, and same-origin requests"
   },
   {
     "id": "local-only",
